@@ -36,9 +36,9 @@ class OrderItems : AppCompatActivity() {
      var uid = FirebaseAuth.getInstance().uid
 
 
-      var db= FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("orders")
+      var db= FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("orders")
            .child(intent.getStringExtra("oid")!!).child("details")
-       var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("orders")
+       var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("orders")
            .child(intent.getStringExtra("oid")!!)
 
 

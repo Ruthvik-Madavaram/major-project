@@ -13,11 +13,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.database.FirebaseDatabase
+import com.rationwala.store.classes.UserDetails
 import kotlinx.android.synthetic.main.activity_register.*
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -59,34 +64,52 @@ class RegisterActivity : AppCompatActivity() {
             {
                 Toast.makeText(this@RegisterActivity,"password not matched",Toast.LENGTH_LONG).show()
             }
+            else if(mobile.text.toString().length!=10)
+            {
+                Toast.makeText(this@RegisterActivity,"please enter correct mobile number",Toast.LENGTH_LONG).show()
+
+            }
             else if(cm.activeNetworkInfo==null)
             {
                 Toast.makeText(this@RegisterActivity,"Please connect to internet",Toast.LENGTH_LONG).show()
 
             }
             else {
-                var auth = FirebaseAuth.getInstance()
-                if(checkLong(e)) {
-                    if (!e.startsWith("+91")) {
-                        e = "+91" + e
-                        sendVerificationCode(e)
-                    }
-                    else {
-                        sendVerificationCode(e)
 
-                    }
-                }
-                else{
                     var pd = ProgressDialog(this@RegisterActivity)
                     pd.setTitle("Creating Account..")
                     pd.show()
+                    auth = FirebaseAuth.getInstance()
                     auth.createUserWithEmailAndPassword(e, p).addOnCompleteListener {
                         if (it.isSuccessful) {
                             pd.dismiss()
                             var uid = FirebaseAuth.getInstance().uid
-                            var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString())
-                            dbase.child("fullname").setValue(n)
-                            dbase.child("email").setValue(e)
+                            var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/")
+                                .getReference("usersinformation").child(uid.toString())
+                            val formatter =
+                                SimpleDateFormat("dd.MM.yyyy, HH:mm")
+                            formatter.setLenient(false)
+                            var d =formatter.format(Date())
+                            var u = UserDetails(n,e,mobile.text.toString(),d)
+                            dbase.setValue(u).addOnCompleteListener(
+                                object : OnCompleteListener<Void>
+                                {
+                                    override fun onComplete(p0: Task<Void>) {
+                                        if(p0.isSuccessful)
+                                        {
+                                            Toast.makeText(this@RegisterActivity, "Success", Toast.LENGTH_LONG).show()
+                                            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                                            finish()
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(this@RegisterActivity, "There was  problem,please try again.", Toast.LENGTH_LONG).show()
+
+                                        }
+                                    }
+
+                                }
+                            )
                             startActivity(Intent(this@RegisterActivity,MainActivity::class.java))
                             finish()
 
@@ -98,7 +121,7 @@ class RegisterActivity : AppCompatActivity() {
                         }
 
                     }
-                }
+
             }
 
 
@@ -108,10 +131,7 @@ class RegisterActivity : AppCompatActivity() {
         }*/
         already.setOnClickListener {
             var i = Intent(this@RegisterActivity, LoginActivity::class.java)
-            val email = Pair.create<View, String>(email, "email")
-            val pass = Pair.create<View, String>(password, "otp")
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@RegisterActivity, email,pass)
-            startActivity(i, options.toBundle())
+            startActivity(i)
 
         }
     }

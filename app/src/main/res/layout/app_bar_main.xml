@@ -23,12 +23,12 @@
         android:contentDescription="@string/menu_icon"
         android:background="@drawable/menu"
         tools:ignore="RtlCompat" />
-    <ImageView
+   <!-- <ImageView
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/rationwala"/>
+        android:src="@drawable/rationwala"/>-->
 
         <RelativeLayout
             android:layout_width="wrap_content"

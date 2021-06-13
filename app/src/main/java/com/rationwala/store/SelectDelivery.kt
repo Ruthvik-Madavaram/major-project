@@ -38,7 +38,7 @@ class SelectDelivery : AppCompatActivity() {
         continu.setOnClickListener {
             paynow()
         }
-        var db = FirebaseDatabase.getInstance().getReference("myinformation").child("ordertiming")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("myinformation").child("ordertiming")
         db.addListenerForSingleValueEvent(
             object : ValueEventListener
             {
@@ -63,7 +63,7 @@ class SelectDelivery : AppCompatActivity() {
 
     private fun loadAddress(selectDelivery: SelectDelivery) {
         var uid = FirebaseAuth.getInstance().uid
-        var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("address")
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("address")
 
         dbase.addValueEventListener(
             object : ValueEventListener
@@ -85,7 +85,7 @@ class SelectDelivery : AppCompatActivity() {
                                 "Landmark: "+map.getValue("landmark")+","+
                                 "Pincode: "+map.getValue("pincode")
 
-                        var db = FirebaseDatabase.getInstance().getReference("deliveryprice").child(map.getValue("pincode"))
+                        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("deliveryprice").child(map.getValue("pincode"))
                         db.addValueEventListener(
                             object : ValueEventListener
                             {

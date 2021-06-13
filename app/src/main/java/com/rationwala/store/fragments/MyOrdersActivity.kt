@@ -58,7 +58,7 @@ class MyOrdersActivity : Fragment() {
         }
         else {
             var uid = FirebaseAuth.getInstance().uid
-            var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                 .child(uid.toString()).child("orders")
             db.addListenerForSingleValueEvent(
                 object : ValueEventListener {

@@ -36,13 +36,13 @@ open class AddAddress : AppCompatActivity() {
             mobile.setText(intent.getStringExtra("mobile"), TextView.BufferType.EDITABLE)
             save.setOnClickListener {
                 var uid = FirebaseAuth.getInstance().uid
-                var dbase = FirebaseDatabase.getInstance().getReference("usersinformation")
+                var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                     .child(uid.toString()).child("mylocation")
                 var x=intent.getStringExtra("from")
                 var l=LocationClass(name.text.toString(),hno.text.toString(),area.text.toString(),landmark.text.toString()
                     ,pincode.text.toString(),lati!!.toString(),longi!!.toString(),mobile.text.toString())
                 dbase.child(x!!).setValue(l)
-                FirebaseDatabase.getInstance().getReference("usersinformation") .child(uid.toString()).child("address").setValue(l)
+                FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation") .child(uid.toString()).child("address").setValue(l)
                 Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
                 finish()
 
@@ -75,10 +75,10 @@ open class AddAddress : AppCompatActivity() {
                         longi!!.toString(),mobile.text.toString()
                     )
                     var uid = FirebaseAuth.getInstance().uid
-                    var dbase = FirebaseDatabase.getInstance().getReference("usersinformation")
+                    var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                         .child(uid.toString()).child("mylocation")
                     dbase.child(dbase.push().key.toString()).setValue(l)
-                    FirebaseDatabase.getInstance().getReference("usersinformation")
+                    FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                         .child(uid.toString()).child("address").setValue(l)
                     Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
                     overridePendingTransition(

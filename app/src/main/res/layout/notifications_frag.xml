@@ -36,6 +36,7 @@
             android:padding="5dp"
             android:id="@+id/clear"
             android:textSize="15dp"
+            android:visibility="gone"
             android:textColor="@color/darkGrey"
             android:fontFamily="@font/opensans_bold"></TextView>
 

@@ -33,85 +33,47 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        terms.setOnClickListener {
-            startActivity(Intent(this,TermsActivity::class.java)
-                )
-            overridePendingTransition(
-                R.anim.slide_in_right,
-                R.anim.slide_out_left
-            );
+        create.setOnClickListener {
+           startActivity(Intent(this@LoginActivity,RegisterActivity::class.java))
         }
 
         login.setOnClickListener {
-
-            var cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            var e = mobile.text.toString()
-            if(fullname.text.toString().isEmpty())
+            // startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+            var cm=getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            var e=email.text.toString()
+            var p = password.text.toString()
+            if(e.isEmpty())
+                email.setError("Email!")
+            else if(p.isEmpty())
+                password.setError("Password!")
+            else if(p.length<8)
+                password.setError("less than 8 digits")
+            else if(cm.activeNetworkInfo==null)
             {
-                Toast.makeText(this@LoginActivity, "Please enter fullname", Toast.LENGTH_LONG)
-                    .show()
-            }
-            else if(e.isEmpty())
-             {
-                 Toast.makeText(this@LoginActivity, "Please enter mobile number", Toast.LENGTH_LONG)
-                     .show()
-             }
-            else if(cm.activeNetworkInfo == null) {
-                Toast.makeText(this@LoginActivity, "Please connect to internet", Toast.LENGTH_LONG)
-                    .show()
-
-            } else {
-                val colors = intArrayOf(R.color.gradStart,R.color.gradEnd)
-                var ar = ArcConfiguration(this)
-                ar.colors = colors
-                pd = SimpleArcDialog(this)
-                pd!!.setConfiguration(ar)
-                pd!!.setTitle("Loading..")
-                pd!!.setCanceledOnTouchOutside(false)
-                pd!!.setCancelable(false)
-                pd!!.show()
-                sendVerificationCode("+91"+e)
+                Toast.makeText(this@LoginActivity,"Please connect to internet", Toast.LENGTH_LONG).show()
 
             }
-        }
+            else
+            {
+                var pd = ProgressDialog(this@LoginActivity)
+                pd.setTitle("Authenticating..")
+                pd.show()
+                var auth = FirebaseAuth.getInstance()
 
-    }
-
-
-
-    private fun sendVerificationCode(number: String) {
-
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            number,
-            60,
-            TimeUnit.SECONDS,
-            TaskExecutors.MAIN_THREAD,
-            mCallBack
-        )
-    }
-
-    private val mCallBack = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        override fun onCodeSent(s: String?, forceResendingToken: PhoneAuthProvider.ForceResendingToken?) {
-            super.onCodeSent(s, forceResendingToken)
-            verificationid = s!!
-            Toast.makeText(this@LoginActivity,"OTP sent to your mobile number", Toast.LENGTH_LONG).show()
-            var i = Intent(this@LoginActivity, OtpActivity::class.java)
-            i.putExtra("otp", verificationid)
-            i.putExtra("fullname",fullname.text.toString())
-            i.putExtra("mobile",mobile.text.toString())
-            startActivity(i)
-            pd!!.dismiss()
-        }
-
-        override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
-            //val code = phoneAuthCredential.smsCode
-
-        }
-
-        override fun onVerificationFailed(e: FirebaseException) {
-            Toast.makeText(this@LoginActivity,"failed to send message", Toast.LENGTH_LONG).show()
-           pd!!.dismiss()
+                auth.signInWithEmailAndPassword(e,p).addOnCompleteListener{
+                    if(it.isSuccessful)
+                    {
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        finish()
+                        pd.dismiss()
+                    }
+                    else
+                    {
+                        Toast.makeText(this@LoginActivity,"invalid email or password", Toast.LENGTH_LONG).show()
+                        pd.dismiss()
+                    }
+                }
+            }
         }
     }
 

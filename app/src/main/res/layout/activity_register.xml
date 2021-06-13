@@ -4,25 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-  >
+    android:background="@drawable/grad"
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_margin="10dp">
+        android:gravity="center_vertical"
+        android:layout_marginTop="80dp">
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="130dp"
-            android:src="@drawable/fin"
-            app:civ_border_width=".5dp"
-            app:civ_border_color="@color/white"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +78,7 @@
                         android:paddingLeft="5dp"
                         android:layout_gravity="center"
                         android:gravity="center|left"
-                        android:hint="Enter User Name"
+                        android:hint="Enter full Name"
                         android:textSize="15sp"
                         android:textColor="@color/black"
                         android:textColorHint="@color/hintColor"
@@ -160,12 +154,8 @@
                         android:paddingLeft="5dp"
                         android:layout_gravity="center"
                         android:gravity="center|left"
-                        android:hint="Email/Mobile Number"
-                        android:digits="1234567890"
-                        android:maxLength="10"
-                        android:maxLines="1"
-                        android:inputType="phone"
-                        android:textSize="15sp"
+                        android:hint="Email"
+                          android:textSize="15sp"
                         android:textColor="@color/black"
                         android:textColorHint="@color/hintColor"
                         android:background="@android:color/transparent"
@@ -173,6 +163,54 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@color/white"
+                app:cardBackgroundColor="@color/white">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_account_circle_black_24dp"
+                        android:backgroundTint="@color/colorPrimaryDark"/>
+
+
+
+
+                    <EditText
+                        android:id="@+id/mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:paddingLeft="5dp"
+                        android:layout_gravity="center"
+                        android:gravity="center|left"
+                        android:hint="mobile no"
+                         android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hintColor"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/opensans_semibold"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -202,12 +240,12 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:paddingLeft="5dp"
-                        android:maxLines="1"
                         android:layout_gravity="center"
                         android:gravity="center|left"
-                        android:hint="Enter Password"
-                        android:inputType="textEmailAddress"
+                        android:hint="Password"
+                        android:password="true"
                         android:textSize="15sp"
+                        android:maxLines="1"
                         android:textColor="@color/black"
                         android:textColorHint="@color/hintColor"
                         android:background="@android:color/transparent"

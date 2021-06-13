@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "61503368753",
+    "project_id": "grocerystore-97326",
+    "storage_bucket": "grocerystore-97326.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61503368753:android:7ef693296a3ad53e106f10",
+        "android_client_info": {
+          "package_name": "com.rationwala.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61503368753-4lhnavl5m5k7s74h9ltpn7hmtdqhfruf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7UvQ4plyCqmhOUFVFHbRY8FXxJa5NZS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61503368753-4lhnavl5m5k7s74h9ltpn7hmtdqhfruf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

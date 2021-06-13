@@ -35,7 +35,7 @@ class Addmoney : AppCompatActivity() {
     }
 
     private fun payusingUpi(money: String) {
-        var db = FirebaseDatabase.getInstance().getReference("myinformation").child("walletupi")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("myinformation").child("walletupi")
         db.addListenerForSingleValueEvent(
             object : ValueEventListener
             {
@@ -174,7 +174,7 @@ class Addmoney : AppCompatActivity() {
 
     private fun addwallet(money: String) {
         var uid = FirebaseAuth.getInstance().uid
-        var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("wallet")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("wallet")
 
         db.addListenerForSingleValueEvent(
             object : ValueEventListener

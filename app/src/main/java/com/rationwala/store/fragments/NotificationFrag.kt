@@ -32,6 +32,7 @@ class NotificationFrag : Fragment() {
 
         var hm= LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
         v.rview.layoutManager = hm
+        v.clear.visibility = View.GONE
 
         var uid= FirebaseAuth.getInstance().uid
         v.clear.setOnClickListener {
@@ -40,7 +41,7 @@ class NotificationFrag : Fragment() {
                 .setCancelable(false)
                 .setPositiveButton("yes",
                     DialogInterface.OnClickListener(){ dialogInterface: DialogInterface, i: Int ->
-                        var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("notificationtime")
+                        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("notificationtime")
                         val formatter =
                             SimpleDateFormat("dd.MM.yyyy, HH:mm")
                         formatter.setLenient(false)
@@ -65,7 +66,7 @@ class NotificationFrag : Fragment() {
             startActivity(Intent(activity, LoginActivity::class.java))
         }
         else {
-            var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                 .child(uid.toString()).child("notificationtime")
             db.addValueEventListener(
                 object : ValueEventListener {
@@ -79,9 +80,8 @@ class NotificationFrag : Fragment() {
                             val formatter =
                                 SimpleDateFormat("dd.MM.yyyy, HH:mm")
                             formatter.setLenient(false)
-                            val cdate = formatter.parse(x)!!
-                            val ctime = cdate.time
-                            notify(ctime, v)
+                            v.clear.visibility = View.GONE
+                             notify(v)
                         } else {
                             v.clear.visibility = View.GONE
                             v.nonoti.visibility = View.VISIBLE
@@ -94,8 +94,8 @@ class NotificationFrag : Fragment() {
         return v
     }
 
-    private fun notify(x: Long,v:View) {
-        var dbase = FirebaseDatabase.getInstance().getReference("notifications")
+    private fun notify(v:View) {
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("notifications")
         val colors = intArrayOf(R.color.gradStart,R.color.gradEnd)
         val pd = SimpleArcDialog(activity)
         var ar = ArcConfiguration(activity)
@@ -129,12 +129,11 @@ class NotificationFrag : Fragment() {
                             formatter.setLenient(false)
                             val cdate = formatter.parse(map.getValue("time"))
                             val ctime = cdate.time
-                            if(ctime>x)
-                            {
+
                                 var n = NotificationClass(map.getValue("title"),map.getValue("body"),map.getValue("img"),map.getValue("time")
                                     ,map.getValue("category"),map.getValue("subcategory"),map.getValue("itemkey"),map.getValue("pos"))
                                 lis.add(n)
-                            }
+
 
 
                         }
@@ -142,7 +141,7 @@ class NotificationFrag : Fragment() {
                         {
                             lis.reverse()
                             v.rview.adapter = NotificationAdapter(activity!!,lis)
-                            v.clear.visibility=View.VISIBLE
+                            v.clear.visibility=View.GONE
                             v.rview.visibility = View.VISIBLE
                             v.nonoti.visibility = View.GONE
                             //spin_kit.visibility=View.GONE

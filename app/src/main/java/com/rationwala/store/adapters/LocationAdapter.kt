@@ -65,7 +65,7 @@ class LocationAdapter(var activity: MyAddress, var lis:MutableList<LocationClass
 
         p0.delete!!.setOnClickListener {
             var uid = FirebaseAuth.getInstance().uid
-            var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("mylocation")
+            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("mylocation")
 
             var alert= AlertDialog.Builder(activity)
             alert.setMessage("Do you want to delete?")

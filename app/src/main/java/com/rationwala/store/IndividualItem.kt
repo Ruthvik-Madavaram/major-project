@@ -46,7 +46,7 @@ class IndividualItem : AppCompatActivity() {
 
         }
 
-        var dbase= FirebaseDatabase.getInstance().getReference("categories").child(cat).child("subcategory").child(subcat).child(key)
+        var dbase= FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories").child(cat).child("subcategory").child(subcat).child(key)
         dbase.addValueEventListener(
             object : ValueEventListener
             {
@@ -101,7 +101,7 @@ class IndividualItem : AppCompatActivity() {
                     sp.adapter = ArrayAdapter(this@IndividualItem,R.layout.support_simple_spinner_dropdown_item,a)
                     sp.setSelection(a.indexOf(quantity))
 
-                    var db1 = FirebaseDatabase.getInstance().getReference("usersinformation").child(FirebaseAuth.getInstance().uid.toString())
+                    var db1 = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(FirebaseAuth.getInstance().uid.toString())
                         .child("cart").child(cat+":"+subcat+":"+key+":"+sp.selectedItemPosition)
                     db1.addValueEventListener(
                         object : ValueEventListener
@@ -187,7 +187,7 @@ class IndividualItem : AppCompatActivity() {
                         }
                         else{
                             var uid = FirebaseAuth.getInstance().uid
-                            var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+                            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                                 .child(uid.toString()).child("cart").child(cat+":"+subcat+":"+key+":"+sp.selectedItemPosition)
                             db.setValue("1")
                             changeDetails(cat,subcat,key,sp.selectedItem.toString())
@@ -231,7 +231,7 @@ class IndividualItem : AppCompatActivity() {
                         }
                         else {
                             var uid = FirebaseAuth.getInstance().uid
-                            var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+                            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                                 .child(uid.toString()).child("cart")
                                 .child(cat + ":" + subcat + ":" + key + ":" + sp.selectedItemPosition)
                             db.addListenerForSingleValueEvent(
@@ -254,7 +254,7 @@ class IndividualItem : AppCompatActivity() {
                     minus.setOnClickListener {
 
                         var uid = FirebaseAuth.getInstance().uid
-                        var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+                        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                             .child(uid.toString()).child("cart").child(cat+":"+subcat+":"+key+":"+sp.selectedItemPosition)
                         db.addListenerForSingleValueEvent(
                             object : ValueEventListener
@@ -293,7 +293,7 @@ class IndividualItem : AppCompatActivity() {
         }
 
         var uid = FirebaseAuth.getInstance().uid
-        var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("cart")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("cart")
 
         db.addValueEventListener(
             object : ValueEventListener
@@ -325,7 +325,7 @@ class IndividualItem : AppCompatActivity() {
 
     private fun changeDetails(cat: String?, subcat: String?, key: String?, quantity: String) {
 
-        var db1 = FirebaseDatabase.getInstance().getReference("usersinformation").child(FirebaseAuth.getInstance().uid.toString())
+        var db1 = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(FirebaseAuth.getInstance().uid.toString())
             .child("cart").child(cat+":"+subcat+":"+key+":"+sp.selectedItemPosition)
         db1.addListenerForSingleValueEvent(
             object : ValueEventListener

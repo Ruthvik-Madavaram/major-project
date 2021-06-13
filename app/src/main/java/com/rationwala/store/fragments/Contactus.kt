@@ -35,7 +35,7 @@ class Contactus : Fragment() {
         pd.setTitle("Loading..")
         pd.show()
 
-        var db = FirebaseDatabase.getInstance().getReference("myinformation")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("myinformation")
         db.addListenerForSingleValueEvent(
             object : ValueEventListener
             {

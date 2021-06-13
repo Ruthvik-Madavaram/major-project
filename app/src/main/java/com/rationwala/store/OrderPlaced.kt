@@ -22,8 +22,8 @@ class OrderPlaced : AppCompatActivity() {
         setContentView(R.layout.activity_order_placed)
         var id = intent.getStringExtra("orderid")
         var num = intent.getStringExtra("mobile")
-        if(!num.equals("xxx")) {
-            var db = FirebaseDatabase.getInstance().getReference("myinformation").child("apikey")
+        /*if(!num.equals("xxx")) {
+            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("myinformation").child("apikey")
             db.addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
@@ -42,19 +42,18 @@ class OrderPlaced : AppCompatActivity() {
             )
 
             orderid.text = id
+        }*/
+        orderid.text = id
+        done.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java).putExtra("activity",""))
         }
         //Toast.makeText(this,num, Toast.LENGTH_LONG).show()
-        done.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java).putExtra("activity","orderplaced"))
-            overridePendingTransition(R.anim.slide_in_right,
-                R.anim.slide_out_left);
 
-        }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-            startActivity(Intent(this, MainActivity::class.java).putExtra("activity","orderplaced"))
+            startActivity(Intent(this, MainActivity::class.java).putExtra("activity",""))
         Toast.makeText(this,"you cant go back",Toast.LENGTH_LONG).show()
             overridePendingTransition(
                 R.anim.slide_in_left,
@@ -109,6 +108,7 @@ class OrderPlaced : AppCompatActivity() {
 
         override fun onPostExecute(result: Unit?) {
             super.onPostExecute(result)
+
 
         }
     }

@@ -27,7 +27,7 @@ class ApplyCoupon : AppCompatActivity(),couponinter {
             overridePendingTransition(R.anim.slide_in_left,
                 R.anim.slide_out_right);
         }
-        var db = FirebaseDatabase.getInstance().getReference("coupons")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("coupons")
         db.addListenerForSingleValueEvent(
             object : ValueEventListener
             {

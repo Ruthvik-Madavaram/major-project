@@ -24,7 +24,7 @@ class MyWallet : AppCompatActivity() {
                 R.anim.slide_out_right);
         }
         var uid = FirebaseAuth.getInstance().uid
-        var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("wallet")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("wallet")
         db.addListenerForSingleValueEvent(
             object : ValueEventListener
             {

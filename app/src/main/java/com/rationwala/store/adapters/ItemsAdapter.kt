@@ -36,7 +36,7 @@ class ItemsAdapter(
     override fun onBindViewHolder(p0: Myholder, p1: Int) {
         var c=0
 
-        var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(FirebaseAuth.getInstance().uid.toString())
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(FirebaseAuth.getInstance().uid.toString())
             .child("cart").child(lis[p1].category+":"+lis[p1].subcategory+":"+lis[p1].key+":"+list[p1])
         db.addListenerForSingleValueEvent(
             object : ValueEventListener
@@ -96,7 +96,7 @@ class ItemsAdapter(
         }
 
 
-        var dbase = FirebaseDatabase.getInstance().getReference("categories").child(lis[p1].category).child("subcategory").child(lis[p1].subcategory)
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories").child(lis[p1].category).child("subcategory").child(lis[p1].subcategory)
             .child(lis[p1].key).child("quantity").child(lis[p1].cost[list[p1]].qkey).child("available")
 
         dbase.addListenerForSingleValueEvent(
@@ -143,7 +143,7 @@ class ItemsAdapter(
                             else {
 
                                 //activity.addtoCa(lis[p1])
-                                var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+                                var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                                     .child(uid.toString()).
                                     child("cart").child(lis[p1].category+":"+lis[p1].subcategory+":"+lis[p1].key+":"+list[p1])
                                 db.setValue("1")
@@ -169,7 +169,7 @@ class ItemsAdapter(
                                 alert.show()                            }
                             else
                             {
-                                var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+                                var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                                     .child(uid.toString()).child("cart").child(lis[p1].category+":"+lis[p1].subcategory+":"+lis[p1].key+":"+list[p1])
                                 db.setValue((p0.count!!.text.toString().toInt()+1).toString())
                                 notifyItemChanged(p1)
@@ -180,7 +180,7 @@ class ItemsAdapter(
                         }
                         p0.minus!!.setOnClickListener {
                             //Toast.makeText(activity,"pressed",Toast.LENGTH_LONG).show()
-                            var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+                            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                                 .child(uid.toString()).child("cart").child(lis[p1].category+":"+lis[p1].subcategory+":"+lis[p1].key+":"+list[p1])
 
                             if(p0.count!!.text.toString().equals("1"))
@@ -208,7 +208,7 @@ class ItemsAdapter(
             list.add(0)
         v.setOnClickListener {
             var uid= FirebaseAuth.getInstance().uid
-            var db = FirebaseDatabase.getInstance().getReference("usersinformation")
+            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation")
                 .child(uid.toString()).child("cart")
             var x = db.push().key.toString()
             lis[myholder.adapterPosition].cartkey = x

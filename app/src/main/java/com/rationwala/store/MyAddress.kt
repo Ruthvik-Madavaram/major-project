@@ -192,7 +192,7 @@ class MyAddress : AppCompatActivity(),AddAddress1 ,GoogleApiClient.ConnectionCal
     }
     private fun loadrview() {
         var uid =FirebaseAuth.getInstance().uid
-        var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("mylocation")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("mylocation")
         db.addValueEventListener(
             object : ValueEventListener
             {
@@ -266,7 +266,7 @@ class MyAddress : AppCompatActivity(),AddAddress1 ,GoogleApiClient.ConnectionCal
 
     override fun addAddress(l: LocationClass) {
         var uid = FirebaseAuth.getInstance().uid
-        var db =  FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("address")
+        var db =  FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("address")
         db.setValue(l)
         Toast.makeText(this,"default address is changed", Toast.LENGTH_LONG).show()
         finish()

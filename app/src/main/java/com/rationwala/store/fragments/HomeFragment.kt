@@ -63,7 +63,7 @@ class HomeFragment : Fragment(),TabInterface {
         sliderView.startAutoCycle();
 
 
-        var banner = FirebaseDatabase.getInstance().getReference("homepage").child("banner")
+        var banner = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("homepage").child("banner")
         banner.addValueEventListener(
             object : ValueEventListener
             {
@@ -93,7 +93,7 @@ class HomeFragment : Fragment(),TabInterface {
         rv_items.layoutManager = gridLayoutManager
         rv_items.itemAnimator = DefaultItemAnimator()
         rv_items.isNestedScrollingEnabled = false
-        var topcat =FirebaseDatabase.getInstance().getReference("topcategories")
+        var topcat =FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("topcategories")
         topcat.addListenerForSingleValueEvent(
             object : ValueEventListener
             {

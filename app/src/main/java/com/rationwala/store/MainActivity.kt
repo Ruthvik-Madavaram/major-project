@@ -90,7 +90,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         pd.setCanceledOnTouchOutside(false)
         pd.setTitle("Loading..")
         pd.show()
-        var db1 =FirebaseDatabase.getInstance().getReference("enable")
+        var dbx =FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/")
+        dbx.setPersistenceEnabled(true)
+        var db1 = dbx.getReference("enable")
         db1.addListenerForSingleValueEvent(
             object : ValueEventListener
             {
@@ -115,51 +117,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     }
                     else
                     {
-                        var db = FirebaseDatabase.getInstance().getReference("appupdate")
-                        db.addListenerForSingleValueEvent(
-                            object : ValueEventListener
-                            {
-                                override fun onCancelled(p0: DatabaseError) {
-
-                                }
-
-                                override fun onDataChange(p0: DataSnapshot) {
-                                    var chi = p0.children
-                                    var map = HashMap<String,String>()
-                                    chi.forEach {
-                                        map.put(it.key.toString(),it.value.toString())
-                                    }
-                                    if(map.getValue("enable").equals("0")||
-                                        (map.getValue("enable").equals("1")&&updatekey.text.toString().equals(map.getValue("version"))))
-                                    {
-                                        pd.dismiss()
-                                        var fragment = HomeFragment()
-                                        supportFragmentManager.beginTransaction()
-                                            .add(R.id.contentPanel, fragment!!).commit()
-                                        loadUserDetails()
-
-                                    }
-                                    else {
-                                        var alert= AlertDialog.Builder(this@MainActivity)
-                                        var v1 =layoutInflater.inflate(R.layout.updatefrag,null)
-                                        alert.setView(v1)
-                                        var alert1 = alert.create()
-                                        alert1.setCanceledOnTouchOutside(false)
-                                        alert1.setCancelable(false)
-                                        alert1.show()
-                                        v1.updateit.setOnClickListener {
-                                            val rateIntent = Intent(
-                                                Intent.ACTION_VIEW,
-                                                Uri.parse("market://details?id=" + (this@MainActivity).getPackageName())
-                                            )
-                                            startActivity(rateIntent)
-                                        }
-                                        pd.dismiss()
-                                    }
-                                }
-
-                            }
-                        )
+                        var fragment = HomeFragment()
+                        supportFragmentManager.beginTransaction()
+                            .add(R.id.contentPanel, fragment!!).commit()
+                        loadUserDetails()
+                        pd.dismiss()
 
 
                     }
@@ -178,7 +140,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
 
         var uid = FirebaseAuth.getInstance().uid
-        var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("cart")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("cart")
 
         db.addValueEventListener(
             object : ValueEventListener
@@ -287,11 +249,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(Intent.createChooser(shareIntent, "Share via"))
             }
             R.id.nav_rate->{
-                val rateIntent = Intent(
+                /*val rateIntent = Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse("market://details?id=" + this.getPackageName())
                 )
-                startActivity(rateIntent)
+                startActivity(rateIntent)*/
             }
             R.id.nav_logout->{
                 if(user!=null) {
@@ -320,7 +282,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun loadUserDetails() {
         var uid = FirebaseAuth.getInstance().uid
-        var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString())
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString())
         dbase.addValueEventListener(
             object : ValueEventListener
             {

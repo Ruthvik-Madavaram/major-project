@@ -50,7 +50,7 @@ class ItemsFrag : Fragment() {
         pd.setCancelable(false)
         pd.setTitle("Loading..")
         pd.show()
-        var db = FirebaseDatabase.getInstance().getReference("categories").child(cato).
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories").child(cato).
         child("subcategory").child(subcat)
 
         db.addListenerForSingleValueEvent(

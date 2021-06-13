@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.FirebaseDatabase
 
 @Suppress("DEPRECATION")
 class FrontPage : AppCompatActivity() {
@@ -15,6 +16,7 @@ class FrontPage : AppCompatActivity() {
         setContentView(R.layout.activity_front_page)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
          var h =Handler()
+        //FirebaseDatabase.getInstance().getReference("demo").setValue("hello")
         h.postDelayed(
                 object : Runnable{
                     override fun run() {

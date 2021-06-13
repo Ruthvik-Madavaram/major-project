@@ -30,7 +30,7 @@ class CartAdapter(var activity: CartActivity, var lis:MutableList<CartClass>): R
         if(lis.size==1)
             c=1
         var uid = FirebaseAuth.getInstance().uid
-        var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("cart").child(lis[p1].item.key)
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("cart").child(lis[p1].item.key)
         Glide.with(activity).load(lis[p1].item.image).placeholder(R.mipmap.ic_launcher).into(p0.im!!)
         p0.name!!.text = lis[p1].item.name
         p0.quantity!!.text = ""+lis[p1].item.quantity

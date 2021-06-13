@@ -41,7 +41,7 @@ class AboutUs : Fragment() {
             tv1.text = "Privacy Policy"
         }
 
-        var db = FirebaseDatabase.getInstance().getReference("myinformation")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("myinformation")
         db.addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {

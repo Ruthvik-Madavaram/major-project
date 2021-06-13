@@ -33,7 +33,7 @@ class OrderonPhone : Fragment() {
         pd.setTitle("Loading..")
         pd.show()
         var uid = FirebaseAuth.getInstance().uid
-        var dbase = FirebaseDatabase.getInstance().getReference("myinformation")
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("myinformation")
         dbase.addListenerForSingleValueEvent(
             object : ValueEventListener
             {

@@ -82,7 +82,7 @@ class Addmobile : AppCompatActivity() {
                         if (o.equals(random.toString())) {
                             Toast.makeText(this, "success", Toast.LENGTH_LONG).show()
                             var uid= FirebaseAuth.getInstance().uid.toString()
-                            var db= FirebaseDatabase.getInstance().getReference("usersinformation").child(uid)
+                            var db= FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid)
                             db.child("mobile").setValue(num)
 
                             overridePendingTransition(R.anim.slide_in_left,

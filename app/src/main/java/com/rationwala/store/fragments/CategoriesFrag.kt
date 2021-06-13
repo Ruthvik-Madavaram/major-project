@@ -34,7 +34,7 @@ class CategoriesFrag : Fragment() {
         pd.setCancelable(false)
         pd.setTitle("Loading..")
         pd.show()
-        var grid = FirebaseDatabase.getInstance().getReference("categories")
+        var grid = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories")
         grid.addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {

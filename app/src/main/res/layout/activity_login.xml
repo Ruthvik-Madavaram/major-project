@@ -97,7 +97,7 @@
                     <!--                        android:backgroundTint="@color/orange" />-->
 
                     <EditText
-                        android:id="@+id/fullname"
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -106,7 +106,7 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/open_sans_semibold"
                         android:gravity="center|left"
-                        android:hint="Fullname"
+                        android:hint="Email"
                         android:paddingLeft="5dp"
                         android:textColor="@color/black"
                         android:textColorHint="@color/hintColor"
@@ -175,7 +175,7 @@
                         android:layout_height="17dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"
-                        android:background="@drawable/ic_email"
+                        android:background="@drawable/ic_key"
                         android:backgroundTint="@color/orange" />
 
                     <!--                    <ImageView-->
@@ -187,25 +187,22 @@
                     <!--                        android:backgroundTint="@color/orange" />-->
 
                     <EditText
-                        android:id="@+id/mobile"
+                        android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@android:color/transparent"
-                        android:digits="1234567890"
-                        android:fontFamily="@font/open_sans_semibold"
-                        android:gravity="center|left"
-                        android:hint="Mobile number"
-                        android:inputType="phone"
-                        android:maxLength="10"
-                        android:maxLines="1"
                         android:paddingLeft="5dp"
+                        android:layout_gravity="center"
+                        android:gravity="center|left"
+                        android:hint="Password"
+                        android:password="true"
+                        android:textSize="15sp"
+                        android:maxLines="1"
                         android:textColor="@color/black"
                         android:textColorHint="@color/hintColor"
-                        android:textSize="15sp" />
-
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/opensans_semibold"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -235,7 +232,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:padding="16dp"
-                    android:text="SEND OTP"
+                    android:text="LOGIN"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -244,6 +241,15 @@
 
 
             </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="new user ? click here"
+            android:id="@+id/create"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
+            android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
 

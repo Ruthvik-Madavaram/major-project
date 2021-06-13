@@ -42,7 +42,7 @@ class BillingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_billing)
         //Toast.makeText(this,intent.getStringExtra("price"),Toast.LENGTH_LONG).show()
-        var db = FirebaseDatabase.getInstance().getReference("gateway")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("gateway")
         back.setOnClickListener {
             finish()
             overridePendingTransition(R.anim.slide_in_left,
@@ -183,7 +183,7 @@ class BillingActivity : AppCompatActivity() {
 
 
     private fun payUsingUpi() {
-        var db = FirebaseDatabase.getInstance().getReference("myinformation").child("upi")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("myinformation").child("upi")
         db.addListenerForSingleValueEvent(
             object : ValueEventListener
             {
@@ -195,8 +195,8 @@ class BillingActivity : AppCompatActivity() {
                     {
                         val uri: Uri = Uri.parse("upi://pay").buildUpon()
                             .appendQueryParameter("pa", p0.value.toString())
-                            .appendQueryParameter("pn", "E.Neeraj")
-                            .appendQueryParameter("tn", "for Rationwala")
+                            .appendQueryParameter("pn", "M.Ruthvik")
+                            .appendQueryParameter("tn", "for Grocery Store")
                             .appendQueryParameter("am", intent.getStringExtra("price"))
                             .appendQueryParameter("cu", "INR")
                             .build()
@@ -401,7 +401,7 @@ class BillingActivity : AppCompatActivity() {
     private fun storeOrder(s: String)
     {
         var uid = FirebaseAuth.getInstance().uid
-        var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("cart")
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("cart")
 
         dbase.addListenerForSingleValueEvent(
             object : ValueEventListener {
@@ -414,7 +414,7 @@ class BillingActivity : AppCompatActivity() {
                         var lis = mutableListOf<ItemClass1>()
                         var chi = p0.children
                         var last = p0.children.last().key.toString()
-                        var tb = FirebaseDatabase.getInstance().getReference("orders")
+                        var tb = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("orders")
                         val max=999
                         val min=100
                         val random = Random.nextInt((max - min) + 1) + min
@@ -430,12 +430,12 @@ class BillingActivity : AppCompatActivity() {
                                 a[i]="0"+a[i]
                         }
                         var tbkey = "ORD"+a[0]+a[1]+a[2]+a[3]+a[4]+a[5]+random.toString()
-                        var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString())
+                        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString())
 
                         chi.forEach {
 
                             var x = it.key.toString().split(":")
-                            var db = FirebaseDatabase.getInstance().getReference("categories")
+                            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories")
                                 .child(x[0]).child("subcategory")
                                 .child(x[1]).child(x[2])
                             var q = (x[3].toInt()).toString()
@@ -492,7 +492,7 @@ class BillingActivity : AppCompatActivity() {
                                         if (lis.size != 0 && it.key.toString().equals(last)) {
                                             //start
 
-                                            var db =FirebaseDatabase.getInstance().getReference("myinformation").child("orderto")
+                                            var db =FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("myinformation").child("orderto")
                                             db.addListenerForSingleValueEvent(
                                                 object : ValueEventListener {
                                                     override fun onCancelled(p0: DatabaseError) {

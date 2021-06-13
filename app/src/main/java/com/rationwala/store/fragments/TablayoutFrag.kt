@@ -44,7 +44,7 @@ class TablayoutFrag : Fragment() {
         pd.setCancelable(false)
         pd.setTitle("Loading..")
         pd.show()
-            var dbase = FirebaseDatabase.getInstance().getReference("homepage").child(item!!)
+            var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("homepage").child(item!!)
             var y = 0
             //Toast.makeText(activit y,item,Toast.LENGTH_LONG).show()
             dbase.addListenerForSingleValueEvent(
@@ -62,7 +62,7 @@ class TablayoutFrag : Fragment() {
                             chi.forEach {
 
                                 var x = it.key.toString().split(":")
-                                var db = FirebaseDatabase.getInstance().getReference("categories")
+                                var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories")
                                     .child(x[0]).child("subcategory")
                                     .child(x[1]).child(x[2])
                                 db.addListenerForSingleValueEvent(

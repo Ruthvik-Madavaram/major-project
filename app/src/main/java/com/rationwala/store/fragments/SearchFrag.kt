@@ -29,7 +29,7 @@ class SearchFrag : Fragment() {
         var lm= LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
         v.recyclerSearch.layoutManager = lm
         var t = Toast.makeText(activity,"no item is found",Toast.LENGTH_SHORT)
-        var db = FirebaseDatabase.getInstance().getReference("categories")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories")
 
         db.addListenerForSingleValueEvent(
             object : ValueEventListener

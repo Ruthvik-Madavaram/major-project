@@ -31,7 +31,7 @@ class CartActivity : AppCompatActivity(),AddAddress1 {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
         var uid = FirebaseAuth.getInstance().uid
-        var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("cart")
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("cart")
         var lm= LinearLayoutManager(this@CartActivity, LinearLayoutManager.VERTICAL,false)
         rview.layoutManager = lm
         val colors = intArrayOf(R.color.gradStart,R.color.gradEnd)
@@ -105,7 +105,7 @@ class CartActivity : AppCompatActivity(),AddAddress1 {
                             chi.forEach {
 
                                 var x = it.key.toString().split(":")
-                                var db = FirebaseDatabase.getInstance().getReference("categories")
+                                var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories")
                                     .child(x[0]).child("subcategory")
                                     .child(x[1]).child(x[2])
                                 var qu = (x[3].toInt()).toString()
@@ -224,7 +224,7 @@ class CartActivity : AppCompatActivity(),AddAddress1 {
                             chi.forEach {
 
                                 var x = it.key.toString().split(":")
-                                var db = FirebaseDatabase.getInstance().getReference("categories")
+                                var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories")
                                     .child(x[0]).child("subcategory")
                                     .child(x[1]).child(x[2])
                                 var qu = (x[3].toInt()).toString()

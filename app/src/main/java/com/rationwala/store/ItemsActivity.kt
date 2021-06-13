@@ -1,5 +1,6 @@
 package com.rationwala.store
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -34,7 +35,7 @@ class ItemsActivity : AppCompatActivity(){
         back.setOnClickListener {
             finish()
         }
-        var dbase = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("cart")
+        var dbase = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("cart")
         dbase.addValueEventListener(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
@@ -50,7 +51,7 @@ class ItemsActivity : AppCompatActivity(){
                         chi.forEach {
 
                             var x = it.key.toString().split(":")
-                            var db = FirebaseDatabase.getInstance().getReference("categories")
+                            var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("categories")
                                 .child(x[0]).child("subcategory")
                                 .child(x[1]).child(x[2])
                             var qu = (x[3].toInt()).toString()
@@ -214,7 +215,7 @@ class ItemsActivity : AppCompatActivity(){
 
 
 
-        var db = FirebaseDatabase.getInstance().getReference("usersinformation").child(uid.toString()).child("cart")
+        var db = FirebaseDatabase.getInstance("https://grocerystore-97326-default-rtdb.firebaseio.com/").getReference("usersinformation").child(uid.toString()).child("cart")
         var user =FirebaseAuth.getInstance().currentUser
         if(user==null)
             ccount.text ="0"
@@ -283,6 +284,7 @@ class ItemsActivity : AppCompatActivity(){
 
     }*/
 
+    @SuppressLint("MissingPermission")
     override fun onStart() {
         super.onStart()
         var cm=getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
